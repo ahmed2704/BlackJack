@@ -67,3 +67,10 @@ Write a method for dealers turn:
 - if broke or blackjack deliver message
 
 Once game over, and outcome correctly reported, ask player if they want to play again & loop back through game after shuffling.
+
+
+
+
+
+credits:
+background img:<a href="https://www.freepik.com/free-vector/flat-design-poker-table-background_88532181.htm#fromView=keyword&page=1&position=1&uuid=4b72209a-3701-4d5e-9e41-dedb216a4e84">Image by freepik</a>

@@ -1,0 +1,17 @@
+body{
+  background-image: url("/css/images/background.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size:auto; /* Resize the background image to cover the entire container */
+}
+
+h1{
+  color: rgb(255, 55, 55);
+  font-size: 50px;
+  text-align: center;
+}
+
+.dealer-cards-container{
+  display: flex;
+  
+}

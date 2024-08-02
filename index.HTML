@@ -5,17 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
     <link rel="stylesheet" href="css/cardstarter.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="app.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="main.js"></script>
 </head>
 <body>
-    <h3>Original Deck</h3>
-    <section id="original-deck-container" class="card-container"></section>
-    <div></div>
-    <button>RE-SHUFFLE DECK</button>
-    <h3>Shuffled Deck</h3>
-    <section id="shuffled-deck-container" class="card-container">
-    </section>
-  </body>
+    <h1 id="game-name">Black Jack</h1>
+    <h2>Dealer <span id="dealer-sum">:</span></h2>
+    
+    <div class="dealer-cards-container">
+        <div class="dealer-cards" id ="dealer-hand"></div>
+        <div id="card-1"><img src="/css/images/backs/red.svg" alt=""></div>
+        <div id="card-2"><img src="/css/images/backs/red.svg" alt=""></div>
+        <div id="card-3"><img src="/css/images/backs/red.svg" alt=""></div>
+        <div id="card-4"><img src="/css/images/backs/red.svg" alt=""></div>
+        <div id="card-5"><img src="/css/images/backs/red.svg" alt=""></div>
+        <div id="card-6"><img src="/css/images/backs/red.svg" alt=""></div>
+    </div>
+    <h2>Player <span id="player-sum">:</span></h2>
+    <div class="player-cards-container">
+        <div  id ="player-hand"></div>
+        <div  id="card-1"></div>
+        <div  id="card-2"></div>
+        <div  id="card-3"></div>
+        <div  id="card-4"></div>
+        <div  id="card-5"></div>
+        <div  id="card-6"></div>
+    </div>
+    <div class="bet-sys">
+        <div id="bank"></div>
+        <input type="number" id="bet" placeholder="PLACE A BET"><button id="confirm-bet">CONFIRM</button>
+        <div id="amount-bet">$100</div>
+    </div>
+
+    <div class="game-fnt">
+        <div><button id="hit">HIT</button></div>
+        <div><button id="stand">STAND</button></div>
+    </div>
+</body>
   
-  </html>
+</html>
