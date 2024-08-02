@@ -1,5 +1,5 @@
 body{
-  background-image: url("/css/images/background.jpg");
+  background-image: url("/images/background.jpg");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size:auto; /* Resize the background image to cover the entire container */
@@ -13,5 +13,9 @@ h1{
 
 .dealer-cards-container{
   display: flex;
+  justify-content: center;
+  max-width:100%;
+  margin-left: auto;
+  margin-right: auto;
   
 }
