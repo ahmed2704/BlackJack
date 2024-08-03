@@ -1,14 +1,18 @@
 body{
   background-image: url("/images/background.jpg");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size:auto; /* Resize the background image to cover the entire container */
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size:auto; 
 }
 
 h1{
-  color: rgb(255, 55, 55);
+  color: #f1f1f1;
   font-size: 50px;
   text-align: center;
+}
+
+h2{
+  color: #F5E0C0;
 }
 
 .dealer-cards-container{
@@ -16,6 +20,80 @@ h1{
   justify-content: center;
   max-width:100%;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; 
+  position: relative;
+}
+
+.player-cards-container{
+  display: flex;
+  justify-content: center;
+  max-width:100%;
+  margin-left: auto;
+  margin-right: auto; 
+  position: relative;
+}
+
+.card {
+  position: relative;
+  width: 150px; 
+  height: 200px; 
+  margin: 10 5px; 
+}
+
+.card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#bank{
+  text-align: center;
+  font-size: 40px;
+  color:#F5E0C0;
+}
+
+.game-func{
+  display: flex;
+  justify-content: center;
   
+  div{
+    width:100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    background-color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+}
+
+.bet-sys{
+  /* border:1px solid red; */
+  margin: auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  height: 100%; 
+ 
+}
+
+#amount-bet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #F5E0C0;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px; 
+  font-size: 2em; 
 }

@@ -10,36 +10,61 @@
 </head>
 <body>
     <h1 id="game-name">Black Jack</h1>
-    <h2>Dealer <span id="dealer-sum">:</span></h2>
+    <div id="bank">Bank: $<span class="bank-amount">5000</span></div>
+    <h2>Dealer: <span id="dealer-sum"></span></h2>
     
     <div class="dealer-cards-container">
         <div class="dealer-cards" id ="dealer-hand"></div>
-        <div class="card back" id="card-1"></div>
-        <div id="card-2"><img src="/images/backs/red.svg" alt=""></div>
-        <div id="card-3"><img src="/images/backs/red.svg" alt=""></div>
-        <div id="card-4"><img src="/images/backs/red.svg" alt=""></div>
-        <div id="card-5"><img src="/images/backs/red.svg" alt=""></div>
-        <div id="card-6"><img src="/images/backs/red.svg" alt=""></div>
+        <div class="card back" id="card-1">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-2">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-3">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-4">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-5">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-6">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
     </div>
-    <h2>Player <span id="player-sum">:</span></h2>
+    <h2>Player: <span id="player-sum"></span></h2>
     <div class="player-cards-container">
         <div  id ="player-hand"></div>
-        <div  id="card-1"></div>
-        <div  id="card-2"></div>
-        <div  id="card-3"></div>
-        <div  id="card-4"></div>
-        <div  id="card-5"></div>
-        <div  id="card-6"></div>
+        <div class="card back" id="card-1">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-2">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-3">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-4">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-5">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
+        <div class="card back" id="card-6">
+            <img src="/images/backs/red.svg" alt="">
+        </div>
     </div>
     <div class="bet-sys">
-        <div id="bank"></div>
         <input type="number" id="bet" placeholder="PLACE A BET"><button id="confirm-bet">CONFIRM</button>
+    </div>
+    <div class="container">
         <div id="amount-bet">$100</div>
     </div>
-
-    <div class="game-fnt">
-        <div><button id="hit">HIT</button></div>
-        <div><button id="stand">STAND</button></div>
+    <div class="game-func">
+        <div id="hit"><strong>HIT</strong></div>
+        <div id="stand"><strong>STAND</strong></div>
     </div>
 </body>
   
