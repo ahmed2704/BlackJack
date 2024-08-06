@@ -9,7 +9,7 @@ const MSG_LOOKUP = {
   'PBJ': 'Player Has Blackjack :smiley:',
   'DBJ': 'Dealer Has Blackjack :pensive:',
 };
-// const mainDeck = buildMainDeck();
+const mainDeck = buildMainDeck();
 /*---------------------------- Variables (state) ----------------------------*/
 let deck;
 let pHand, dHand;
@@ -17,76 +17,135 @@ let dTotal, pTotal;
 let bankRoll , bet;
 let outcome;
 /*------------------------ Cached Element References ------------------------*/
-const confirmButton = document.querySelector("#confirm-bet");
-const inputBetEl = document.querySelector("#bet");
+const msgEl = document.querySelector("#msg");
+const dHandEl = document.querySelector(".dealer-cards-container")
+const dTotalEl = document.querySelector("#dealer-total")
+const pHandEl = document.querySelector(".player-cards-container")
+const pTotalEl = document.querySelector("#player-total")
+const bankRollEl = document.querySelector(".bank-amount");
+const BetEl = document.querySelector("#amount-bet");
 const hitButton = document.querySelector("#hit");
 const standButton = document.querySelector("#stand");
-const amountBetEl = document.querySelector("#amount-bet");
-const bankEl = document.querySelector(".bank-amount");
-const msgEl = document.querySelector("#msg");
+const dealBtn = document.querySelector("#deal");
+const betBtns = document.querySelectorAll("bet-container > button");
 /*----------------------------- Event Listeners -----------------------------*/
-inputBetEl.addEventListener("keypress", betPlaced)
-confirmButton.addEventListener("click", handleBet);
-// hitButton.addEventListener("click");
-// standButton.addEventListener("click");
+dealBtn.addEventListener('click', handleDeal);
+document.getElementById('bet-container').addEventListener('click', handleBet);
+
 /*-------------------------------- Functions --------------------------------*/
 
 
 
 init();
 
-function init() {
-  bank = 5000;
+function handleBet(evt) {
+  const btn = evt.target;
+  if (btn.tagName !== 'BUTTON') return;
+  const betAmt = parseInt(btn.innerText.replace('$', ''));
+  console.log(betAmt)
+  bet += betAmt;
+  bankRoll -= betAmt;
   render();
-  buildDeck();
-  shuffleDeck();
-}
-function buildDeck() {
-deck = [];
-suits = ["Hearts", "Clubs", "Diamonds", "Spades"];
-const cards = [
-  "Ace",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "Jack",
-  "Queen",
-  "King",
-];
-
-for(const card of cards){
-    for(const suit of suits){
-        deck.push({card: card, suit: suit});
-    }
-};
 }
 
-
-function shuffleDeck(){
-  for (let i = 0; i < deck.length - 1; i++) {
-    let j = Math.floor(Math.random() * deck.length)
-    let temp = deck[i];
-    deck[i] = deck[j];
-    deck[j] = temp;
+function handleDeal() {
+  deck = getNewShuffleDeck();
+  dHand.push(deck.pop(), deck.pop());
+  pHand.push(deck.pop(), deck.pop());
+  dTotal = getHandTotal(dHand);
+  pHand = getHandTotal(pHand)
+  if (dTotal === 21 && pTotal === 21) {
+    outcome = 'T'
+  } else if (dTotal === 21) {
+    outcome = 'DBJ';
+  } else if (pTotal === 21) {
+    outcome = 'PBJ';
   }
+  if (outcome) settleBet();
+  render
 }
 
-async function betPlaced(evt){
-  console.log(evt.target.value)
-  amountBet = await evt.target.value 
+function settleBet() {
+
 }
-console.log(amountBet)
-function handleBet(){
-  const btn = amountBet;
-  const amounBtetEl = amountBet;
-  
+
+function getHandTotal(hand) {
+  let total = 0;
+  let aces = o;
+  hand.forEach(function(card) {
+    total += card.value;
+    if (card.value === 11) aces++;
+  })
+  while (total > 21 && aces) {
+    total -= 10;
+    aces --;
+  }
+  return total;
+}
+
+function init() {
+  outcome = null;
+  dHand = [];
+  pHand = [];
+  pTotal = dTotal = 0;
+  bankRoll = 500;
+  bet = 0;
+  render();
+}
+
+function render() {
+  renderHands();
+  BetEl.innerHTML = bet;
+  bankRollEl.innerHTML = bankRoll;
+  renderControls();
+  renderBetBtns();
+  msgEl.innerHTML = MSG_LOOKUP[outcome];
+}
+
+function renderBetBtns() {
+  betBtns.forEach(function(btn) {
+    const btnAmt = parseInt(btn.innerText.replace('$', ''))
+    btn.disabled = btnAmt > bankRoll;
+  })
+}
+
+function renderControls() {
+
+}
+
+function renderHands() {
+  pTotalEl.innerHTML = pTotal;
+  dTotalEl.innerHTML = outcome ? dTotal : "?";
+  pHandEl.innerHTML = pHand.map(card => `<div class="card ${card.face}"></div>`).join("");
+  dHandEl.innerHTML = dHand.map((card, idx) => `<div class="card ${idx === 1 && !outcome ? 'back' : card.face}"></div>`).join('');
+}
+
+
+function getNewShuffleDeck() {
+  const tempDeck = [...mainDeck];
+  const newShuffleDeck = [];
+  while (tempDeck.length) {
+    const rndIdx = Math.floor(Math.random() * tempDeck.length);
+    newShuffleDeck.push(tempDeck.splice(rndIdx, 1)[0])
+  }
+  return newShuffleDeck;
+}
+
+function buildMainDeck() {
+  const deck = [];
+  suits.forEach(function(suit) {
+    ranks.forEach(function(rank) {
+      deck.push({
+        face:`${suit}${rank}`,
+        value: Number(rank) || (rank === 'A' ? 11 : 10)
+      })
+    })
+  })
+  return deck;
+}
+
+
+
   // when confirmButton clicked take placeBet amount and put it into amounBtetEl and subtracts placeBet amount from bankEl
-  // if player wins amountBetEl gets * 1.5 and placed back into bankEl
+  // if player wins BetEl gets * 1.5 and placed back into bankEl
   // if player loses 
-}

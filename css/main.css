@@ -84,6 +84,12 @@ h2 {
   align-items: center;
 }
 
+#bet-container{
+  display: flex;
+  justify-content: center;
+  
+}
+
 .container {
   position: relative;
   height: 100%;
