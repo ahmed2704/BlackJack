@@ -28,18 +28,51 @@ const handActiveControlsEl = document.getElementById("hand-active-controls");
 const handOverControlsEl = document.getElementById("hand-over-controls");
 const dealBtn = document.getElementById("deal-btn");
 const betBtns = document.querySelectorAll("#bet-controls > button");
-const hitBtn = document.getElementById('hit-btn');
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 dealBtn.addEventListener('click', handleDeal);
-hitBtn.addEventListener('click', handleHit);
-document.getElementById('bet-container').addEventListener('click', handleBet);
+document.getElementById('hit-btn').addEventListener('click', handleHit);
+document.getElementById('stand-btn').addEventListener('click', handleStand);
+document.getElementById('bet-controls').addEventListener('click', handleBet);
 
 /*-------------------------------- Functions --------------------------------*/
 
 
 
 init();
+
+
+function handleStand() {
+  dealerPlay(function() {
+    if (pTotal === dTotal) {
+      outcome = 'T';
+    } else if (dTotal > pTotal) {
+      outcome = 'D';
+    } else {
+      outcome = 'P';
+    } 
+    settleBet();
+    render();
+  });
+}
+  
+  
+function dealerPlay(cb) {
+  outcome = 'D';
+  renderHands();
+  setTimeout(function() {
+    if (dTotal < 17){
+      dHand.push(deck.pop());
+      dTotal = getHandTotal(dHand);
+      dealerPlay(cb);
+    } else {
+      cb()
+    }
+  }, 1000);
+  
+}
+
 
 function handleHit() {
   pHand.push(deck.pop());
@@ -62,7 +95,10 @@ function handleBet(evt) {
 }
 
 function handleDeal() {
+  outcome = null;
   deck = getNewShuffleDeck();
+  dHand = [];
+  pHand = [];
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
   dTotal = getHandTotal(dHand);
@@ -89,7 +125,7 @@ function settleBet() {
 
 function getHandTotal(hand) {
   let total = 0;
-  let aces = o;
+  let aces = 0;
   hand.forEach(function(card) {
     total += card.value;
     if (card.value === 11) aces++;
@@ -140,6 +176,9 @@ function renderHands() {
   dealerHandEl.innerHTML = dHand.map((card, idx) => `<div class="card ${idx === 1 && !outcome ? 'back' : card.face}"></div>`).join('');
 }
 
+function handInPlay() {
+  return pHand.length && !outcome;
+}
 
 function getNewShuffleDeck() {
   const tempDeck = [...mainDeck];
