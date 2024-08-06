@@ -9,69 +9,37 @@
     <script defer src="js/main.js"></script>
  </head>
  <body>
-    <h1 id="game-name">Black Jack</h1>
-    <h2 id="msg">text</h2>
-    <div id="bank">Bank: $<span class="bank-amount">5000</span></div>
-    <h2>Dealer: <span id="dealer-total"></span></h2>
-    
-    <div class="dealer-cards-container">
-        <div class="dealer-cards" id ="dealer-hand"></div>
-        <div class="card back" id="card-1">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-2">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-3">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-4">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-5">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-6">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-    </div>
-    <h2>Player: <span id="player-total"></span></h2>
-    <div class="player-cards-container">
-        <div  id ="player-hand"></div>
-        <div class="card back" id="card-1">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-2">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-3">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-4">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-5">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-        <div class="card back" id="card-6">
-            <img src="/images/backs/red.svg" alt="">
-        </div>
-    </div>
-    <section id="bet-container">
-        <h5>Click to add to bet</h5>
-        <button>$1</button>
-        <button>$5</button>
-        <button>$25</button>
-        <button>$100</button>
-      </section>
-    <div class="container">
-        <div id="amount-bet">$100</div>
-    </div>
-    <div class="game-func">
-        <div id="hit"><strong>HIT</strong></div>
-        <div id="stand"><strong>STAND</strong></div>
-        <div id="deal"><strong>DEAL</strong></div>
-    </div>
+    <div>
+        <h1 id="msg"></h1>
+        <h3>Dealer Hand</h3>
+        <section id="dealer-hand" class="card-container"></section>
+        <div>Dealer Has: <span id="dealer-total"></span></div>
+        <h3>Player Hand</h3>
+        <section id="player-hand" class="card-container"></section>
+        <div>Player Has: <span id="player-total"></span></div>
+      </div>
+      <div>
+        <section>
+          <div>Bet Amount: $<span id="bet"></span></div>
+          <div>Bankroll: $<span id="bankroll"></span></div>
+        </section>
+        <section id="hand-over-controls">
+          <button id="deal-btn">Deal</button>
+          <div id="bet-controls">
+            <h5>Click to Add to Bet</h5>
+            <button>$1</button>
+            <button>$5</button>
+            <button>$25</button>
+            <button>$100</button>
+            <h5>Press Shift While Clicking to Subtract</h5>
+          </div>
+        </section>
+        <section id="hand-active-controls">
+          <button id="stand-btn">Stand</button>
+          <button id="hit-btn">Hit</button>
+          <button id="double-btn">Double Down</button>
+        </section>
+      </div>
 </body>
   
 </html>

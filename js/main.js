@@ -17,19 +17,22 @@ let dTotal, pTotal;
 let bankRoll , bet;
 let outcome;
 /*------------------------ Cached Element References ------------------------*/
-const msgEl = document.querySelector("#msg");
-const dHandEl = document.querySelector(".dealer-cards-container")
-const dTotalEl = document.querySelector("#dealer-total")
-const pHandEl = document.querySelector(".player-cards-container")
-const pTotalEl = document.querySelector("#player-total")
-const bankRollEl = document.querySelector(".bank-amount");
-const BetEl = document.querySelector("#amount-bet");
-const hitButton = document.querySelector("#hit");
-const standButton = document.querySelector("#stand");
-const dealBtn = document.querySelector("#deal");
-const betBtns = document.querySelectorAll("bet-container > button");
+const msgEl = document.getElementById("msg");
+const dealerHandEl = document.getElementById("dealer-hand")
+const dealerTotalEl = document.getElementById("dealer-total")
+const playerHandEl = document.getElementById("player-hand")
+const playerTotalEl = document.getElementById("player-total")
+const betEl = document.getElementById("bet");
+const bankRollEl = document.getElementById("bankroll");
+const handActiveControlsEl = document.getElementById("hand-active-controls");
+const handOverControlsEl = document.getElementById("hand-over-controls");
+const dealBtn = document.getElementById("deal-btn");
+const betBtns = document.querySelectorAll("#bet-controls > button");
+const hitBtn = document.getElementById('hit-btn');
+
 /*----------------------------- Event Listeners -----------------------------*/
 dealBtn.addEventListener('click', handleDeal);
+hitBtn.addEventListener('click', handleHit);
 document.getElementById('bet-container').addEventListener('click', handleBet);
 
 /*-------------------------------- Functions --------------------------------*/
@@ -37,6 +40,16 @@ document.getElementById('bet-container').addEventListener('click', handleBet);
 
 
 init();
+
+function handleHit() {
+  pHand.push(deck.pop());
+  pTotal = getHandTotal(pHand);
+  if (pTotal > 21)  {
+    outcome = 'D';
+    settleBet();
+  } 
+  render();
+}
 
 function handleBet(evt) {
   const btn = evt.target;
@@ -53,7 +66,7 @@ function handleDeal() {
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
   dTotal = getHandTotal(dHand);
-  pHand = getHandTotal(pHand)
+  pHand = getHandTotal(pHand);
   if (dTotal === 21 && pTotal === 21) {
     outcome = 'T'
   } else if (dTotal === 21) {
@@ -66,7 +79,12 @@ function handleDeal() {
 }
 
 function settleBet() {
-
+  if (outcome === 'PBJ'){
+    bankRoll += bet + (bet * 1.5);
+  } else if (outcome === 'P') {
+    bankRoll += bet + bet * 2;
+  }
+  bet = 0
 }
 
 function getHandTotal(hand) {
@@ -95,7 +113,7 @@ function init() {
 
 function render() {
   renderHands();
-  BetEl.innerHTML = bet;
+  betEl.innerHTML = bet;
   bankRollEl.innerHTML = bankRoll;
   renderControls();
   renderBetBtns();
@@ -110,14 +128,16 @@ function renderBetBtns() {
 }
 
 function renderControls() {
-
+  handOverControlsEl.style.visibility = handInPlay() ? 'hidden' : 'visible';
+  handActiveControlsEl.style.visibility = bet >= 5 && !handInPlay() ? 'visible' : 'hidden';
+  dealBtn.style.visibility = bet >= 5 && !handInPlay() ? 'visible' : 'hidden';
 }
 
 function renderHands() {
-  pTotalEl.innerHTML = pTotal;
-  dTotalEl.innerHTML = outcome ? dTotal : "?";
-  pHandEl.innerHTML = pHand.map(card => `<div class="card ${card.face}"></div>`).join("");
-  dHandEl.innerHTML = dHand.map((card, idx) => `<div class="card ${idx === 1 && !outcome ? 'back' : card.face}"></div>`).join('');
+  playerTotalEl.innerHTML = pTotal;
+  dealerTotalEl.innerHTML = outcome ? dTotal : "??";
+  playerHandEl.innerHTML = pHand.map(card => `<div class="card ${card.face}"></div>`).join("");
+  dealerHandEl.innerHTML = dHand.map((card, idx) => `<div class="card ${idx === 1 && !outcome ? 'back' : card.face}"></div>`).join('');
 }
 
 
@@ -136,7 +156,7 @@ function buildMainDeck() {
   suits.forEach(function(suit) {
     ranks.forEach(function(rank) {
       deck.push({
-        face:`${suit}${rank}`,
+        face:`${suit}-${rank}`,
         value: Number(rank) || (rank === 'A' ? 11 : 10)
       })
     })
@@ -147,5 +167,5 @@ function buildMainDeck() {
 
 
   // when confirmButton clicked take placeBet amount and put it into amounBtetEl and subtracts placeBet amount from bankEl
-  // if player wins BetEl gets * 1.5 and placed back into bankEl
+  // if player wins betEl gets * 1.5 and placed back into bankEl
   // if player loses 
