@@ -20,8 +20,8 @@ const MSG_LOOKUP = {
   T: "It's a Push",
   P: "Player Wins!",
   D: "Dealer Wins",
-  PBJ: "Player Has Blackjack :smiley:",
-  DBJ: "Dealer Has Blackjack :pensive:",
+  PBJ: "Player Has Blackjack 🤑🤑💰💰",
+  DBJ: "Dealer Has Blackjack 😞😞😢😢",
 };
 const mainDeck = buildMainDeck();
 /*---------------------------- Variables (state) ----------------------------*/
