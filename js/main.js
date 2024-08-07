@@ -1,27 +1,41 @@
 /*-------------------------------- Constants --------------------------------*/
 const suits = ["h", "c", "d", "s"];
-const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+const ranks = [
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "J",
+  "Q",
+  "K",
+  "A",
+];
 const MSG_LOOKUP = {
-  null: 'Good Luck!',
-  'T': "It's a Push",
-  'P': 'Player Wins!',
-  'D': 'Dealer Wins',
-  'PBJ': 'Player Has Blackjack :smiley:',
-  'DBJ': 'Dealer Has Blackjack :pensive:',
+  null: "Good Luck!",
+  T: "It's a Push",
+  P: "Player Wins!",
+  D: "Dealer Wins",
+  PBJ: "Player Has Blackjack :smiley:",
+  DBJ: "Dealer Has Blackjack :pensive:",
 };
 const mainDeck = buildMainDeck();
 /*---------------------------- Variables (state) ----------------------------*/
 let deck;
 let pHand, dHand;
-let dTotal, pTotal; 
-let bankRoll , bet;
+let dTotal, pTotal;
+let bankRoll, bet;
 let outcome;
 /*------------------------ Cached Element References ------------------------*/
 const msgEl = document.getElementById("msg");
-const dealerHandEl = document.getElementById("dealer-hand")
-const dealerTotalEl = document.getElementById("dealer-total")
-const playerHandEl = document.getElementById("player-hand")
-const playerTotalEl = document.getElementById("player-total")
+const dealerHandEl = document.getElementById("dealer-hand");
+const dealerTotalEl = document.getElementById("dealer-total");
+const playerHandEl = document.getElementById("player-hand");
+const playerTotalEl = document.getElementById("player-total");
 const betEl = document.getElementById("bet");
 const bankRollEl = document.getElementById("bankroll");
 const handActiveControlsEl = document.getElementById("hand-active-controls");
@@ -29,66 +43,58 @@ const handOverControlsEl = document.getElementById("hand-over-controls");
 const dealBtn = document.getElementById("deal-btn");
 const betBtns = document.querySelectorAll("#bet-controls > button");
 
-
 /*----------------------------- Event Listeners -----------------------------*/
-dealBtn.addEventListener('click', handleDeal);
-document.getElementById('hit-btn').addEventListener('click', handleHit);
-document.getElementById('stand-btn').addEventListener('click', handleStand);
-document.getElementById('bet-controls').addEventListener('click', handleBet);
+dealBtn.addEventListener("click", handleDeal);
+document.getElementById("hit-btn").addEventListener("click", handleHit);
+document.getElementById("stand-btn").addEventListener("click", handleStand);
+document.getElementById("bet-controls").addEventListener("click", handleBet);
 
 /*-------------------------------- Functions --------------------------------*/
 
-
-
 init();
 
-
 function handleStand() {
-  dealerPlay(function() {
+  dealerPlay(function () {
     if (pTotal === dTotal) {
-      outcome = 'T';
+      outcome = "T";
     } else if (dTotal > pTotal) {
-      outcome = 'D';
+      outcome = "D";
     } else {
-      outcome = 'P';
-    } 
+      outcome = "P";
+    }
     settleBet();
     render();
   });
 }
-  
-  
+
 function dealerPlay(cb) {
-  outcome = 'D';
+  outcome = "D";
   renderHands();
-  setTimeout(function() {
-    if (dTotal < 17){
+  setTimeout(function () {
+    if (dTotal < 17) {
       dHand.push(deck.pop());
       dTotal = getHandTotal(dHand);
       dealerPlay(cb);
     } else {
-      cb()
+      cb();
     }
   }, 1000);
-  
 }
-
 
 function handleHit() {
   pHand.push(deck.pop());
   pTotal = getHandTotal(pHand);
-  if (pTotal > 21)  {
-    outcome = 'D';
+  if (pTotal > 21) {
+    outcome = "D";
     settleBet();
-  } 
+  }
   render();
 }
 
 function handleBet(evt) {
   const btn = evt.target;
-  if (btn.tagName !== 'BUTTON') return;
-  const betAmt = parseInt(btn.innerText.replace('$', ''));
-  console.log(betAmt)
+  if (btn.tagName !== "BUTTON") return;
+  const betAmt = parseInt(btn.innerText.replace("$", ""));
   bet += betAmt;
   bankRoll -= betAmt;
   render();
@@ -102,37 +108,38 @@ function handleDeal() {
   dHand.push(deck.pop(), deck.pop());
   pHand.push(deck.pop(), deck.pop());
   dTotal = getHandTotal(dHand);
-  pHand = getHandTotal(pHand);
+  pTotal = getHandTotal(pHand);
   if (dTotal === 21 && pTotal === 21) {
-    outcome = 'T'
+    outcome = "T";
   } else if (dTotal === 21) {
-    outcome = 'DBJ';
+    outcome = "DBJ";
   } else if (pTotal === 21) {
-    outcome = 'PBJ';
+    outcome = "PBJ";
   }
   if (outcome) settleBet();
-  render
+  render();
 }
 
 function settleBet() {
-  if (outcome === 'PBJ'){
-    bankRoll += bet + (bet * 1.5);
-  } else if (outcome === 'P') {
+  if (outcome === "PBJ") {
+    bankRoll += bet + bet * 1.5;
+  } else if (outcome === "P") {
     bankRoll += bet + bet * 2;
-  }
-  bet = 0
+  } else if(outcome === "T")
+    bankRoll += bet
+  bet = 0;
 }
 
 function getHandTotal(hand) {
   let total = 0;
   let aces = 0;
-  hand.forEach(function(card) {
+  hand.forEach(function (card) {
     total += card.value;
     if (card.value === 11) aces++;
-  })
+  });
   while (total > 21 && aces) {
     total -= 10;
-    aces --;
+    aces--;
   }
   return total;
 }
@@ -157,23 +164,33 @@ function render() {
 }
 
 function renderBetBtns() {
-  betBtns.forEach(function(btn) {
-    const btnAmt = parseInt(btn.innerText.replace('$', ''))
+  betBtns.forEach(function (btn) {
+    const btnAmt = parseInt(btn.innerText.replace("$", ""));
     btn.disabled = btnAmt > bankRoll;
-  })
+  });
 }
 
 function renderControls() {
-  handOverControlsEl.style.visibility = handInPlay() ? 'hidden' : 'visible';
-  handActiveControlsEl.style.visibility = bet >= 5 && !handInPlay() ? 'visible' : 'hidden';
-  dealBtn.style.visibility = bet >= 5 && !handInPlay() ? 'visible' : 'hidden';
+  handOverControlsEl.style.display = handInPlay() ? "none" : "flex";
+  handActiveControlsEl.style.visibility =
+    bet >= 5 && handInPlay() ? "visible" : "hidden";
+  dealBtn.style.visibility = bet >= 5 && !handInPlay() ? "visible" : "hidden";
 }
 
 function renderHands() {
   playerTotalEl.innerHTML = pTotal;
   dealerTotalEl.innerHTML = outcome ? dTotal : "??";
-  playerHandEl.innerHTML = pHand.map(card => `<div class="card ${card.face}"></div>`).join("");
-  dealerHandEl.innerHTML = dHand.map((card, idx) => `<div class="card ${idx === 1 && !outcome ? 'back' : card.face}"></div>`).join('');
+  playerHandEl.innerHTML = pHand
+    .map((card) => `<div class="card ${card.face}"></div>`)
+    .join("");
+  dealerHandEl.innerHTML = dHand
+    .map(
+      (card, idx) =>
+        `<div class="card ${
+          idx === 1 && !outcome ? "back-red" : card.face
+        }"></div>`
+    )
+    .join("");
 }
 
 function handInPlay() {
@@ -185,26 +202,24 @@ function getNewShuffleDeck() {
   const newShuffleDeck = [];
   while (tempDeck.length) {
     const rndIdx = Math.floor(Math.random() * tempDeck.length);
-    newShuffleDeck.push(tempDeck.splice(rndIdx, 1)[0])
+    newShuffleDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
   return newShuffleDeck;
 }
 
 function buildMainDeck() {
   const deck = [];
-  suits.forEach(function(suit) {
-    ranks.forEach(function(rank) {
+  suits.forEach(function (suit) {
+    ranks.forEach(function (rank) {
       deck.push({
-        face:`${suit}-${rank}`,
-        value: Number(rank) || (rank === 'A' ? 11 : 10)
-      })
-    })
-  })
+        face: `${suit}${rank}`,
+        value: Number(rank) || (rank === "A" ? 11 : 10),
+      });
+    });
+  });
   return deck;
 }
 
-
-
-  // when confirmButton clicked take placeBet amount and put it into amounBtetEl and subtracts placeBet amount from bankEl
-  // if player wins betEl gets * 1.5 and placed back into bankEl
-  // if player loses 
+// when confirmButton clicked take placeBet amount and put it into amounBtetEl and subtracts placeBet amount from bankEl
+// if player wins betEl gets * 1.5 and placed back into bankEl
+// if player loses
