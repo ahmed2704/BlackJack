@@ -75,17 +75,11 @@ function handleStand() {
 }
 
 function dealerPlay(cb) {
-  outcome = "D";
-  renderHands();
-  setTimeout(function () {
-    if (dTotal < 17) {
-      dHand.push(deck.pop());
-      dTotal = getHandTotal(dHand);
-      dealerPlay(cb);
-    } else {
-      cb();
-    }
-  }, 1000);
+  // while dealer has a total less than 17
+  while (dTotal < 17) {
+    dHand.push(deck.pop()); // add a card to the dealer hand
+    dTotal = getHandTotal(dHand); // calculate the total of the dealer hand
+  }
 }
 
 function handleHit() {
@@ -129,9 +123,9 @@ function handleDeal() {
 
 function settleBet() {
   if (outcome === "PBJ") {
-    bankRoll += bet + bet * 1.5;
-  } else if (outcome === "P") {
     bankRoll += bet + bet * 2;
+  } else if (outcome === "P") {
+    bankRoll += bet + bet * 1.5;
   } else if(outcome === "T")
     bankRoll += bet
   bet = 0;
