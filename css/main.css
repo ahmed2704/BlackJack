@@ -2,9 +2,19 @@ body {
   background-image: url("/css/images/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+#huge-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
 h1 {
   color: #f5e0c0;
   font-size: 50px;

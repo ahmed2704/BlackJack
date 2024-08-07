@@ -54,17 +54,24 @@ document.getElementById("bet-controls").addEventListener("click", handleBet);
 init();
 
 function handleStand() {
-  dealerPlay(function () {
-    if (pTotal === dTotal) {
-      outcome = "T";
-    } else if (dTotal > pTotal) {
-      outcome = "D";
-    } else {
-      outcome = "P";
-    }
-    settleBet();
-    render();
-  });
+  dealerPlay();
+  if (pTotal > 21) {
+    outcome = (dTotal > 21) ? 'T' : 'D'; // Player busts, check if dealer also busts
+  } else if (dTotal > 21) {
+    outcome = 'P'; // Dealer busts, player wins
+  } else if (pTotal === 21) {
+    outcome = (dTotal === 21) ? 'T' : 'PBJ'; // Player hits 21, check if dealer also hits 21
+  } else if (dTotal === 21) {
+    outcome = 'DBJ'; // Dealer hits 21, dealer wins
+  } else if (pTotal === dTotal) {
+    outcome = 'T'; // Tie
+  } else if (pTotal > dTotal) {
+    outcome = 'P'; // Player has a higher total without busting
+  } else {
+    outcome = 'D'; // Dealer has a higher total or player's total is not greater
+  }
+  settleBet();
+  render();
 }
 
 function dealerPlay(cb) {
@@ -149,7 +156,7 @@ function init() {
   dHand = [];
   pHand = [];
   pTotal = dTotal = 0;
-  bankRoll = 500;
+  bankRoll = 5000;
   bet = 0;
   render();
 }
