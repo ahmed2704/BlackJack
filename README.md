@@ -1,19 +1,58 @@
 # credits:
 background img:<a href="https://www.freepik.com/free-vector/flat-design-poker-table-background_88532181.htm#fromView=keyword&page=1&position=1&uuid=4b72209a-3701-4d5e-9e41-dedb216a4e84">Image by freepik</a>
 
+cards/ cards images: Jim
+
 # Blackjack
+
 The objective of Blackjack, also known as Twenty-One, is to beat the dealer by getting a hand value closer to 21 than the dealer's hand, without going over 21. 
 
 # How to Win
-* Blackjack: If your first two cards are an Ace and a 10-value card (10, Jack, Queen, King), this is an automatic win (Blackjack).
 
-* Higher Value than Dealer: If your hand total is closer to 21 than the dealer's hand total without going bust, you win. Winnings are typically paid out at 1:1.
+**Objective:**
 
-* Dealer Busts: If the dealer's hand total goes over 21 (busts), you win regardless of your hand value.
+Aim to have a hand value as close to 21 as possible without exceeding it.
+Beat the dealer's hand without going over 21.
+Card Values:
 
-* Push: If your hand total equals the dealer's hand total, it's a tie (push) and your bet is returned without any winnings or losses.
+Number cards (2-10) are worth their face value.
+Face cards (Jack, Queen, King) are worth 10 points each.
+Aces can be worth 1 or 11 points, whichever is more favorable.
 
-* Lower Value than Dealer: If the dealer's hand total is closer to 21 than yours without busting, you lose your bet.
+**Game Setup:**
+
+Played with one or more standard 52-card decks.
+Each player places a bet before any cards are dealt.
+Dealing Cards:
+
+Each player is dealt two cards, face up.
+The dealer is dealt two cards: one face up, one face down (the "hole" card).
+
+**Player's Turn:**
+
+Players decide whether to "hit" (take another card) or "stand" (keep their current hand).
+Players can continue to hit until they decide to stand or exceed 21 (bust).
+
+**Dealer's Turn:**
+
+Once all players have completed their turns, the dealer reveals their hole card.
+The dealer must hit until their hand totals 17 or higher.
+If the dealer busts, all remaining players win.
+
+**Winning the Game:**
+
+If a player's hand is closer to 21 than the dealer's without busting, the player wins.
+If the player and dealer have the same hand value, it's a "push" (tie), and the player's bet is returned.
+If the dealer has a higher hand value without busting, the dealer wins.
+
+**Blackjack:**
+
+If a player is dealt an Ace and a 10-value card as their initial two cards, they have a "blackjack" and typically win 1.5 times their bet, unless the dealer also has a blackjack, resulting in a push.
+
+**Basic Strategy:**
+
+Players can use strategies based on the dealer's visible card to decide when to hit or stand.
+Common strategies involve hitting on lower totals and standing on higher totals, especially when the dealer shows a weak upcard (like 4, 5, or 6).
 
 ## Live Demo
 
