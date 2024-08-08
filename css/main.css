@@ -16,15 +16,29 @@ body {
   height: 100%;
   width: 100%;
 }
+
+.bnk-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer {
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-top: 2vh;
+  text-wrap: wrap;
+}
+
 h1 {
   color: #f5e0c0;
   font-size: 50px;
-  text-align: center;
+  padding-left: 37%;
 }
-#msg {
+/* #msg {
   text-align: center;
   font-size: 40px;
-}
+} */
 h2 {
   color: #f5e0c0;
 }
@@ -78,8 +92,8 @@ h5 {
 
 .card {
   position: relative;
-  width: 150px;
-  height: 200px;
+  width: 100px;
+  height: 130px;
   margin: 10 5px;
 }
 
@@ -93,9 +107,9 @@ h5 {
 }
 
 #bank-roll {
-  text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   color: #f5e0c0;
+  padding-right: 5%;
 }
 
 #hand-active-controls button {
@@ -139,7 +153,7 @@ h5 {
 
 #bet-amount {
   position: fixed;
-  bottom: 0;
+  bottom: 7vh;
   left: 0;
   color: #f5e0c0;
   margin: 10px;

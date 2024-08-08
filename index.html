@@ -11,7 +11,10 @@
   <body>
     <div id="huge-div">
       <div>
-        <h1 id="msg"></h1>
+        <div class="bnk-container">
+          <h1 id="msg"></h1>
+          <div id="bank-roll">Bankroll: $<span id="bankroll"></span></div>
+        </div>
         <h3>Dealer Hand</h3>
         <section id="dealer-hand" class="card-container"></section>
         <div id="dealer-has">Dealer Has: <span id="dealer-total"></span></div>
@@ -36,14 +39,25 @@
         </section>
         <section>
           <div id="bet-amount">Bet Amount: $<span id="bet"></span></div>
-          <div id="bank-roll">Bankroll: $<span id="bankroll"></span></div>
         </section>
-        <p>
-          In blackjack, your goal is to get a hand value close to 21 without going over. Each player and the dealer are dealt two cards. Number cards are worth their face value, face cards are 10, and Aces are 1 or 11. You choose to "hit" (take a card) or "stand" (keep your hand). If you go over 21, you lose.
-          
-          After players finish, the dealer reveals their hidden card and must hit until reaching at least 17. The closest hand to 21 without busting wins. If you have an Ace and a 10-value card as your first two cards, it's called a "blackjack" and usually pays more. The game is about beating the dealer without busting.  <strong>
-
-          (Gambling can be addictive and may lead to financial problems. Always gamble responsibly, set limits on how much time and money you spend, and never gamble more than you can afford to lose. If you think you may have a gambling problem, seek help from a professional or contact a gambling support organization.)</strong></p>
+        <footer>
+          In blackjack, your goal is to get a hand value close to 21 without
+          going over. Each player and the dealer are dealt two cards. Number
+          cards are worth their face value, face cards are 10, and Aces are 1 or
+          11. You choose to "hit" (take a card) or "stand" (keep your hand). If
+          you go over 21, you lose. After players finish, the dealer reveals
+          their hidden card and must hit until reaching at least 17. The closest
+          hand to 21 without busting wins. If you have an Ace and a 10-value
+          card as your first two cards, it's called a "blackjack" and usually
+          pays more. The game is about beating the dealer without busting.
+          <strong>
+            (Gambling can be addictive and may lead to financial problems.
+            Always gamble responsibly, set limits on how much time and money you
+            spend, and never gamble more than you can afford to lose. If you
+            think you may have a gambling problem, seek help from a professional
+            or contact a gambling support organization.)</strong
+          >
+        </footer>
       </div>
     </div>
   </body>
