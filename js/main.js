@@ -120,8 +120,6 @@ function handleDeal() {
   //check for blackjack scenarios
   if (dTotal === 21 && pTotal === 21) {
     outcome = "T";
-  // } else if (dTotal === 21 && pTotal !== 21) {
-  //   outcome = "DBJ";
   } else if (pTotal === 21 && dTotal !== 21) {
     outcome = "PBJ";
   }

@@ -75,13 +75,13 @@ https://imgur.com/a/0m333hT
 
 # Getting Started
 
-1. Place a bet by clicking on one of the bet buttons (Chips with $25, $100, and $500).
+1. Read the footer (it contains instructions on how to play)
 
-2. Click deal to start the game.
+2. Place a bet by clicking on one of the bet buttons (Chips with $25, $100, and $500).
 
-3. Choose whether to hit (add a card to your hand) or stand (skip your turn).
+3. Click deal to start the game.
 
-4. Check the "How to Win" section for instructions on winning the game.
+4. Choose whether to hit (add a card to your hand) or stand (end your turn).
 
 # Next Steps
 
