@@ -60,8 +60,7 @@ You can play the game here: [blackjack]https://ahmed2704.github.io/BlackJack/
 
 # Screenshot
 
-https://imgur.com/a/0m333hT
-
+![Imgur](https://i.imgur.com/GkXYgIG.png)
 
 # Technologies Used
 

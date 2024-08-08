@@ -226,8 +226,8 @@ function getNewShuffleDeck() {
 
 function buildMainDeck() {
   const deck = [];
-  suits.forEach(function (suit) {// iterate over each suit
-    ranks.forEach(function (rank) {//iterate over each rank
+  suits.forEach(function (suit) {
+    ranks.forEach(function (rank) {
       deck.push({
         face: `${suit}${rank}`,//create card face string
         //sets card value (ace is 11, face cards are 10)
